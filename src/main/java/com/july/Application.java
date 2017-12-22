@@ -19,7 +19,7 @@ public class Application {
 
     @RequestMapping("/hello")
     public String hello(Map<String, Object> map) {
-        map.put("name", "July");
+        map.put("name", "July~");
         map.put("city", "shenzhen");
         return "hello";
     }
