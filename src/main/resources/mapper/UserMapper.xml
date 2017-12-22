@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.july.biz.mapper.UserMapper">
+    <select id="selectUser" resultType="com.july.biz.entity.UserEntity">
+        SELECT
+          id AS userId,
+          name AS userName,
+          phone AS mobile,
+          active_time AS activeDate
+        FROM user
+        WHERE deleted = 0
+    </select>
+</mapper>

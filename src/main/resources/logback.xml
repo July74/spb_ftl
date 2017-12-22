@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>
+                <![CDATA[[%d{yyyy-MM-dd HH:mm:ss.SSS} [%.6thread] %-5level %logger{36}.%method:%L ] - %msg%n]]></pattern>
+            <charset>utf8</charset>
+        </encoder>
+    </appender>
+
+    <appender name="ALL" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder>
+            <pattern>
+                <![CDATA[[%d{yyyy-MM-dd HH:mm:ss.SSS} [%.10thread] %-5level %logger{36}.%method<%L>] - %msg%n]]></pattern>
+            <charset>utf8</charset>
+        </encoder>
+        <file>/data/logs/spt_ftl/all.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/data/logs/spt_ftl/all-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <MaxHistory>30</MaxHistory>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder>
+            <pattern>
+                <![CDATA[[%d{yyyy-MM-dd HH:mm:ss.SSS} [%.10thread] %-5level %logger{36}.%method<%L>] - %msg%n]]></pattern>
+            <charset>utf8</charset>
+        </encoder>
+        <file>/data/logs/spt_ftl/error.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/data/logs/spt_ftl/error-%d{yyyy-MM-dd}.log
+            </fileNamePattern>
+            <MaxHistory>30</MaxHistory>
+        </rollingPolicy>
+        <!-- 只打印错误日志 -->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <logger name="org.springframework" level="INFO"/>
+    <logger name="org.hibernate" level="INFO"/>
+    <logger name="freemarker.cache" level="INFO"/>
+    <logger name="org.apache.ibatis" level="INFO"/>
+    <logger name="org.mybatis" level="INFO"/>
+    <root>
+        <level value="DEBUG"/>
+        <appender-ref ref="ALL"/>
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="ERROR"/>
+    </root>
+</configuration>
